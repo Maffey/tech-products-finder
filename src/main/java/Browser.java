@@ -15,9 +15,9 @@ import java.util.concurrent.TimeUnit;
 public class Browser {
 
     private static final Logger logger = LogManager.getLogger(Browser.class);
-    public static WebDriver driver = new FirefoxDriver();
-    public final static Properties selectorsRepository = loadObjectRepository();
     private static final String SELENIUM_OBJECT_REPOSITORY_FILE = "\\selenium_object_repository.properties";
+    public final static Properties selectorsRepository = loadObjectRepository();
+    public static WebDriver driver = new FirefoxDriver();
 
     public static void setImplicitWaitTime(int waitTime) {
         // Allow every page to load fully in time of X seconds.
@@ -47,7 +47,7 @@ public class Browser {
 
     private static ArrayList<ProductItem> productWebElementsToProductItems(List<WebElement> productWebElements) {
         ArrayList<ProductItem> productItems = new ArrayList<>();
-        for (WebElement productElement: productWebElements) {
+        for (WebElement productElement : productWebElements) {
             ProductItem product = new ProductItem(productElement);
             productItems.add(product);
         }

@@ -11,10 +11,10 @@ public class TestCsvHandling {
 
     // TODO: test_file.csv should be created before all and then removed after all.
 
-    private static ArrayList<String[]> listOfRows;
     private static final String[] HEADER = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
     private static final String TEST_FILE = ".\\src\\test\\files\\test_file.csv";
     private static final String TEST_SAVE_FILE = ".\\src\\test\\files\\test_save_results.csv";
+    private static ArrayList<String[]> listOfRows;
 
     @BeforeAll
     static void setUpData() {
@@ -30,8 +30,7 @@ public class TestCsvHandling {
         File file = new File(TEST_SAVE_FILE);
         if (file.delete()) {
             System.out.println("File deleted successfully");
-        }
-        else {
+        } else {
             System.out.println("Failed to delete the file");
         }
     }

@@ -4,10 +4,10 @@ import com.opencsv.exceptions.CsvValidationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,7 +35,7 @@ public class CsvRepository {
         ArrayList<String[]> csvContents = new ArrayList<>();
         try (
                 FileReader fileReader = new FileReader(csvFile);
-                CSVReader csvReader = new CSVReader(fileReader);
+                CSVReader csvReader = new CSVReader(fileReader)
         ) {
             String[] nextRecord;
             while ((nextRecord = csvReader.readNext()) != null) {
