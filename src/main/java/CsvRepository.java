@@ -18,7 +18,7 @@ public class CsvRepository {
 
     public CsvRepository(String csvFile) {
         this.csvFile = csvFile;
-        logger.info("CSV File path: " + this.csvFile);
+        logger.debug("CSV File path: " + this.csvFile);
     }
 
     public void print() {

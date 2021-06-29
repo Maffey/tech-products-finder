@@ -27,6 +27,8 @@ public class ProductItem {
                 .getText();
         // Remove currency information from string
         smartwatchPrice = smartwatchPrice.substring(0, smartwatchPrice.length() - 3);
+        // Remove whitespace number separators
+        smartwatchPrice = smartwatchPrice.replaceAll(" ", "");
         // Replace value delimiter
         smartwatchPrice = changeDelimiter(smartwatchPrice);
         return Float.parseFloat(smartwatchPrice);

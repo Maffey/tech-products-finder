@@ -13,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestCsvHandling {
 
+    // TODO: test_output.csv should be created before all and then removed after all.
+
     private static ArrayList<String[]> listOfRows;
     private static final String[] header = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
     private static final String testFilePath = ".\\src\\test\\files\\test_output.csv";
@@ -43,7 +45,7 @@ public class TestCsvHandling {
     }
 
     @Test
-    void returnCorrectContents() {
+    void readCorrectContents() {
         CsvRepository csvRepo = new CsvRepository(testFilePath);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(csvContents).hasSameElementsAs(listOfRows);
