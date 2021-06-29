@@ -14,8 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 public class Main {
 
-    // TODO: Create a framework layer
-
     private static final Logger logger = LogManager.getLogger(Main.class);
     protected static final String XKOM_URL = "https://www.x-kom.pl";
 

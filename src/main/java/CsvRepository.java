@@ -13,7 +13,6 @@ import java.util.Arrays;
 
 public class CsvRepository {
     private static final Logger logger = LogManager.getLogger(CsvRepository.class);
-    // TODO
     private final String csvFile;
 
     public CsvRepository(String csvFile) {
@@ -45,7 +44,6 @@ public class CsvRepository {
 
         } catch (IOException e) {
             logger.warn("No file found. Returning empty contents.");
-            e.printStackTrace();
         } catch (CsvValidationException e) {
             logger.warn("Wrong record in CSV file. Returning empty contents.");
         }
@@ -69,11 +67,6 @@ public class CsvRepository {
             logger.warn("No file found. Save operation unsuccessful.");
             e.printStackTrace();
         }
-    }
-
-    private boolean csvFileExists(String checkedCsvFile) {
-        File csvFile = new File(checkedCsvFile);
-        return csvFile.exists();
     }
 
 }

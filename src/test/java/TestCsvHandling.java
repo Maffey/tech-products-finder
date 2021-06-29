@@ -1,37 +1,45 @@
-import com.opencsv.CSVReader;
-import com.opencsv.exceptions.CsvValidationException;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestCsvHandling {
 
-    // TODO: test_output.csv should be created before all and then removed after all.
+    // TODO: test_file.csv should be created before all and then removed after all.
 
     private static ArrayList<String[]> listOfRows;
-    private static final String[] header = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
-    private static final String testFilePath = ".\\src\\test\\files\\test_output.csv";
+    private static final String[] HEADER = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
+    private static final String TEST_FILE = ".\\src\\test\\files\\test_file.csv";
+    private static final String TEST_SAVE_FILE = ".\\src\\test\\files\\test_save_results.csv";
 
     @BeforeAll
     static void setUpData() {
         listOfRows = new ArrayList<>();
-        listOfRows.add(header);
+        listOfRows.add(HEADER);
         listOfRows.add(new String[]{"Smartwatch Samsung Galaxy Watch Active 2 Aluminium 44mm Rose Gold", "119,00", "5,5"});
         listOfRows.add(new String[]{"Smartwatch Huawei Watch GT 2 Pro czarny", "200,00", "4,0"});
         listOfRows.add(new String[]{"Smartwatch Xiaomi Mi Watch Navy", "300,00", "3,5"});
     }
 
+    @AfterAll
+    static void deleteFiles() {
+        File file = new File(TEST_SAVE_FILE);
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        }
+        else {
+            System.out.println("Failed to delete the file");
+        }
+    }
+
     @Test
     void saveResultsToCsvFile() {
-        CsvRepository csvRepo = new CsvRepository(testFilePath);
-        csvRepo.save(listOfRows, header);
+        CsvRepository csvRepo = new CsvRepository(TEST_SAVE_FILE);
+        csvRepo.save(listOfRows, HEADER);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(listOfRows).hasSameElementsAs(csvContents);
     }
@@ -46,7 +54,7 @@ public class TestCsvHandling {
 
     @Test
     void readCorrectContents() {
-        CsvRepository csvRepo = new CsvRepository(testFilePath);
+        CsvRepository csvRepo = new CsvRepository(TEST_FILE);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(csvContents).hasSameElementsAs(listOfRows);
     }
