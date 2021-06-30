@@ -16,7 +16,6 @@ public class TestCsvHandling {
     private static final String TEST_FILE = ".\\src\\test\\test_files\\test_file.csv";
     private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_save_results.csv";
     private static ArrayList<String[]> listOfRows;
-    private static ArrayList<ProductItem> listOfObjects;
 
     @BeforeAll
     static void setUpData() {

@@ -7,13 +7,14 @@ import org.example.products_framework.ProductsPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// TODO: Parametrize
 public class TestSmartwatchFinder {
 
     private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_saving_objects.csv";
@@ -40,64 +41,28 @@ public class TestSmartwatchFinder {
         }
     }
 
-    @Test
-    void canFindSmartwatchTitleOfFirstElement() {
-        smartwatch = smartwatchItemElements.get(0);
+    @ParameterizedTest
+    @EnumSource(ProductTestData.class)
+    void canFindSmartwatchTitle(ProductTestData testData) {
+        smartwatch = smartwatchItemElements.get(testData.getIndex());
         String smartwatchName = smartwatch.getName();
-        assertThat(smartwatchName).isEqualTo("Smartband Xiaomi Mi Band 5 czarny");
+        assertThat(smartwatchName).isEqualTo(testData.getName());
     }
 
-    @Test
-    void canFindSmartwatchPriceOfFirstElement() {
-        smartwatch = smartwatchItemElements.get(0);
+    @ParameterizedTest
+    @EnumSource(ProductTestData.class)
+    void canFindSmartwatchPrice(ProductTestData testData) {
+        smartwatch = smartwatchItemElements.get(testData.getIndex());
         float smartwatchPrice = smartwatch.getPrice();
-        assertThat(smartwatchPrice).isEqualTo(119.00f);
+        assertThat(smartwatchPrice).isEqualTo(testData.getPrice());
     }
 
-    @Test
-    void canFindRatingOfFirstElement() {
-        smartwatch = smartwatchItemElements.get(0);
+    @ParameterizedTest
+    @EnumSource(ProductTestData.class)
+    void canFindRating(ProductTestData testData) {
+        smartwatch = smartwatchItemElements.get(testData.getIndex());
         float smartwatchRating = smartwatch.getRating();
-        assertThat(smartwatchRating).isEqualTo(5.5f);
-    }
-
-    @Test
-    void canFindSmartwatchTitleOfThirdElement() {
-        smartwatch = smartwatchItemElements.get(2);
-        String smartwatchName = smartwatch.getName();
-        assertThat(smartwatchName).isEqualTo("Smartband Xiaomi Mi Band 6");
-    }
-
-    @Test
-    void canFindSmartwatchPriceOfThirdElement() {
-        smartwatch = smartwatchItemElements.get(2);
-        float smartwatchPrice = smartwatch.getPrice();
-        assertThat(smartwatchPrice).isEqualTo(179.00f);
-    }
-
-    @Test
-    void canFindRatingOfThirdElement() {
-        smartwatch = smartwatchItemElements.get(2);
-        float smartwatchRating = smartwatch.getRating();
-        assertThat(smartwatchRating).isEqualTo(5.8f);
-    }
-
-    @Test
-    void productObjectHasCorrectTitle() {
-        smartwatch = smartwatchItemElements.get(0);
-        assertThat(smartwatch.getName()).isEqualTo("Smartband Xiaomi Mi Band 5 czarny");
-    }
-
-    @Test
-    void productObjectHasCorrectPricing() {
-        smartwatch = smartwatchItemElements.get(0);
-        assertThat(smartwatch.getPrice()).isEqualTo(119.0f);
-    }
-
-    @Test
-    void productObjectHasCorrectRating() {
-        smartwatch = smartwatchItemElements.get(0);
-        assertThat(smartwatch.getRating()).isEqualTo(5.5f);
+        assertThat(smartwatchRating).isEqualTo(testData.getRating());
     }
 
     @Test

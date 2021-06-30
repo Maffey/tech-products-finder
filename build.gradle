@@ -18,7 +18,12 @@ dependencies {
 
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junit"
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junit"
+    testImplementation "org.junit.jupiter:junit-jupiter-params:$junit"
+
     testImplementation "org.assertj:assertj-core:$assertj"
+
+    testImplementation "io.cucumber:cucumber-java8:$cucumber"
+    testImplementation "io.cucumber:cucumber-junit:$cucumber"
 }
 
 test {
