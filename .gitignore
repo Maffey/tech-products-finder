@@ -129,6 +129,11 @@ gradle-app.setting
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,intellij
 
+# Generated output
 csv_output/
 
+# Files used for testing
 src/test/test_files/
+
+# Log files
+logs/
