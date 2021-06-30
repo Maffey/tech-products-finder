@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.products_framework.ProductItem;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -13,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class TestCsvHandling {
 
     private static final String[] HEADER = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
-    private static final String TEST_FILE = ".\\src\\test\\test_files\\test_file.csv";
-    private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_save_results.csv";
+    private static final String CSV_REPOSITORY_TEST_FILE = ".\\src\\test\\test_files\\test_file.csv";
+    private static final String CSV_REPOSITORY_TEST_FILE_SAVE = ".\\src\\test\\test_files\\test_save_results.csv";
     private static ArrayList<String[]> listOfRows;
 
     @BeforeAll
@@ -29,7 +28,7 @@ public class TestCsvHandling {
 
     @AfterAll
     static void deleteFiles() {
-        File file = new File(TEST_SAVE_FILE);
+        File file = new File(CSV_REPOSITORY_TEST_FILE_SAVE);
         if (file.delete()) {
             System.out.println("File deleted successfully");
         } else {
@@ -39,7 +38,7 @@ public class TestCsvHandling {
 
     @Test
     void saveStringRowsToCsvFile() {
-        CsvRepository csvRepo = new CsvRepository(TEST_SAVE_FILE);
+        CsvRepository csvRepo = new CsvRepository(CSV_REPOSITORY_TEST_FILE_SAVE);
         csvRepo.saveStringsList(listOfRows, HEADER);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(listOfRows).hasSameElementsAs(csvContents);
@@ -55,7 +54,7 @@ public class TestCsvHandling {
 
     @Test
     void readCorrectContents() {
-        CsvRepository csvRepo = new CsvRepository(TEST_FILE);
+        CsvRepository csvRepo = new CsvRepository(CSV_REPOSITORY_TEST_FILE);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(csvContents).hasSameElementsAs(listOfRows);
     }

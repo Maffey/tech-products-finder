@@ -76,6 +76,23 @@ public class CsvRepository {
         }
     }
 
+    public void saveStringsList(ArrayList<String[]> listOfRows) {
+        File csvFile = new File(this.csvFile);
+        try (
+                FileWriter fileWriter = new FileWriter(csvFile);
+                CSVWriter csvWriter = new CSVWriter(fileWriter)
+        ) {
+
+            for (String[] row : listOfRows) {
+                csvWriter.writeNext(row);
+            }
+
+        } catch (IOException e) {
+            logger.warn("No file found. Save operation unsuccessful.");
+            e.printStackTrace();
+        }
+    }
+
     public void saveProductsList(ArrayList<ProductItem> listOfProducts) {
         File csvFile = new File(this.csvFile);
         try (
@@ -95,5 +112,4 @@ public class CsvRepository {
             e.printStackTrace();
         }
     }
-
 }
