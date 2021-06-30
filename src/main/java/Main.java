@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 public class Main {
 
-    protected static final String XKOM_URL = "https://www.x-kom.pl";
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
 
-        SmartwatchesPage smartwatchesPage = new SmartwatchesPage();
+        ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
         smartwatchesPage.goTo();
 
         // Find all smartwatches and gather information about them

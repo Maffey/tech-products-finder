@@ -14,7 +14,7 @@ public class TestSmartwatchFinder {
 
     @BeforeAll
     static void setUpDriver() {
-        SmartwatchesPage smartwatchesPage = new SmartwatchesPage();
+        ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
         smartwatchesPage.goTo();
 
         smartwatchItemElements = smartwatchesPage.getSmartwatches();
