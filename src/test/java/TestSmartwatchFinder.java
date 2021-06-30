@@ -2,6 +2,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,6 +12,8 @@ public class TestSmartwatchFinder {
 
     private static ProductItem smartwatch;
     private static ArrayList<ProductItem> smartwatchItemElements;
+    private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_saving_objects.csv";
+    private static final String[] HEADER = {"NAME", "PRICE", "RATING"};
 
     @BeforeAll
     static void setUpDriver() {
@@ -21,8 +24,14 @@ public class TestSmartwatchFinder {
     }
 
     @AfterAll
-    static void tearDownDriver() {
+    static void tearResources() {
         Browser.close();
+        File file = new File(TEST_SAVE_FILE);
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
     }
 
     @Test
@@ -90,6 +99,21 @@ public class TestSmartwatchFinder {
         smartwatch = smartwatchItemElements.get(0);
         String printData = smartwatch.print();
         assertThat(printData).isEqualTo("Title: Smartband Xiaomi Mi Band 5 czarny | Price: 119.0 | Rating: 5.5");
+    }
+
+    @Test
+    void saveObjectRowsToCsvFile() {
+        CsvRepository csvRepo = new CsvRepository(TEST_SAVE_FILE);
+        ArrayList<String[]> listOfRows = new ArrayList<>();
+        listOfRows.add(HEADER);
+        for (ProductItem smartwatch: smartwatchItemElements) {
+            listOfRows.add(new String[]{smartwatch.getName(),
+                    String.valueOf(smartwatch.getPrice()),
+                    String.valueOf(smartwatch.getRating())});
+        }
+        csvRepo.saveProductsList(smartwatchItemElements);
+        ArrayList<String[]> csvContents = csvRepo.read();
+        assertThat(listOfRows).hasSameElementsAs(csvContents);
     }
 
 }

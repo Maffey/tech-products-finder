@@ -1,5 +1,9 @@
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
+import com.opencsv.bean.StatefulBeanToCsv;
+import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.exceptions.CsvDataTypeMismatchException;
+import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 import com.opencsv.exceptions.CsvValidationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -51,20 +55,40 @@ public class CsvRepository {
         return csvContents;
     }
 
-    public void save(ArrayList<String[]> listOfRows, String[] header) {
+    public void saveStringsList(ArrayList<String[]> listOfRows, String[] header) {
         File csvFile = new File(this.csvFile);
-        try {
-            FileWriter fileWriter = new FileWriter(csvFile);
-            CSVWriter csvWriter = new CSVWriter(fileWriter);
+        try (
+                FileWriter fileWriter = new FileWriter(csvFile);
+                CSVWriter csvWriter = new CSVWriter(fileWriter)
+        ) {
             csvWriter.writeNext(header);
 
             for (String[] row : listOfRows) {
                 csvWriter.writeNext(row);
             }
-            csvWriter.close();
 
         } catch (IOException e) {
             logger.warn("No file found. Save operation unsuccessful.");
+            e.printStackTrace();
+        }
+    }
+
+    public void saveProductsList(ArrayList<ProductItem> listOfProducts) {
+        File csvFile = new File(this.csvFile);
+        try (
+                FileWriter fileWriter = new FileWriter(csvFile)
+        ) {
+            StatefulBeanToCsv<ProductItem> beanToCsv = new StatefulBeanToCsvBuilder<ProductItem>(fileWriter)
+                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
+
+            beanToCsv.write(listOfProducts);
+
+        } catch (IOException e) {
+            logger.warn("No file found. Save operation unsuccessful.");
+            e.printStackTrace();
+
+        } catch (CsvRequiredFieldEmptyException | CsvDataTypeMismatchException e) {
+            logger.error("CSV data error.");
             e.printStackTrace();
         }
     }

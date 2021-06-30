@@ -9,12 +9,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestCsvHandling {
 
-    // TODO: test_file.csv should be created before all and then removed after all.
-
     private static final String[] HEADER = {"Smartwatch Name", "Price (PLN)", "Rating (x/6)"};
-    private static final String TEST_FILE = ".\\src\\test\\files\\test_file.csv";
-    private static final String TEST_SAVE_FILE = ".\\src\\test\\files\\test_save_results.csv";
+    private static final String TEST_FILE = ".\\src\\test\\test_files\\test_file.csv";
+    private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_save_results.csv";
     private static ArrayList<String[]> listOfRows;
+    private static ArrayList<ProductItem> listOfObjects;
 
     @BeforeAll
     static void setUpData() {
@@ -23,6 +22,7 @@ public class TestCsvHandling {
         listOfRows.add(new String[]{"Smartwatch Samsung Galaxy Watch Active 2 Aluminium 44mm Rose Gold", "119,00", "5,5"});
         listOfRows.add(new String[]{"Smartwatch Huawei Watch GT 2 Pro czarny", "200,00", "4,0"});
         listOfRows.add(new String[]{"Smartwatch Xiaomi Mi Watch Navy", "300,00", "3,5"});
+
     }
 
     @AfterAll
@@ -36,9 +36,9 @@ public class TestCsvHandling {
     }
 
     @Test
-    void saveResultsToCsvFile() {
+    void saveStringRowsToCsvFile() {
         CsvRepository csvRepo = new CsvRepository(TEST_SAVE_FILE);
-        csvRepo.save(listOfRows, HEADER);
+        csvRepo.saveStringsList(listOfRows, HEADER);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(listOfRows).hasSameElementsAs(csvContents);
     }

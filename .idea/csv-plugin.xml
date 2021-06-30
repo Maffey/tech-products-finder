@@ -11,6 +11,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\src\test\files\test_file.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>
