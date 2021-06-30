@@ -1,3 +1,5 @@
+package org.example.products_framework;
+
 // This implementation allows for further expansion into searching multiple different product categories.
 public enum ProductCategoryPage {
 

@@ -1,3 +1,9 @@
+package org.example;
+
+import org.example.products_framework.Browser;
+import org.example.products_framework.ProductCategoryPage;
+import org.example.products_framework.ProductItem;
+import org.example.products_framework.ProductsPage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -10,10 +16,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // TODO: Parametrize
 public class TestSmartwatchFinder {
 
-    private static ProductItem smartwatch;
-    private static ArrayList<ProductItem> smartwatchItemElements;
     private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_saving_objects.csv";
     private static final String[] HEADER = {"NAME", "PRICE", "RATING"};
+    private static ProductItem smartwatch;
+    private static ArrayList<ProductItem> smartwatchItemElements;
 
     @BeforeAll
     static void setUpDriver() {
@@ -106,7 +112,7 @@ public class TestSmartwatchFinder {
         CsvRepository csvRepo = new CsvRepository(TEST_SAVE_FILE);
         ArrayList<String[]> listOfRows = new ArrayList<>();
         listOfRows.add(HEADER);
-        for (ProductItem smartwatch: smartwatchItemElements) {
+        for (ProductItem smartwatch : smartwatchItemElements) {
             listOfRows.add(new String[]{smartwatch.getName(),
                     String.valueOf(smartwatch.getPrice()),
                     String.valueOf(smartwatch.getRating())});

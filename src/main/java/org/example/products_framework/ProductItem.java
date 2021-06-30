@@ -1,3 +1,5 @@
+package org.example.products_framework;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 

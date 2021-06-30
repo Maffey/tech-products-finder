@@ -1,3 +1,5 @@
+package org.example.products_framework;
+
 import java.util.ArrayList;
 
 public class ProductsPage {

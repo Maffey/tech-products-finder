@@ -1,5 +1,11 @@
+package org.example;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.example.products_framework.Browser;
+import org.example.products_framework.ProductCategoryPage;
+import org.example.products_framework.ProductItem;
+import org.example.products_framework.ProductsPage;
 
 import java.util.ArrayList;
 
