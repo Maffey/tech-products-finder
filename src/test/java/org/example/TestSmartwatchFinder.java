@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-// TODO: Tests are brittle due to the instability of prices and ratings.
-// Tests should check if price EXISTS, and checking correct values should be done using mocks / dummy data.
+// Tests are brittle due to the instability of prices and ratings.
+// Optimally, should check if price EXISTS, and checking correct values should be done using mocks / dummy data.
 
 public class TestSmartwatchFinder {
 
@@ -38,12 +38,13 @@ public class TestSmartwatchFinder {
         Browser.close();
         File file = new File(TEST_SAVE_FILE);
         if (file.delete()) {
-            System.out.println("File deleted successfully");
+            System.out.println("[+] File deleted successfully");
         } else {
-            System.out.println("Failed to delete the file");
+            System.out.println("[-] Failed to delete the file");
         }
     }
 
+    // Brittle test
     @ParameterizedTest
     @EnumSource(ProductTestData.class)
     void canFindSmartwatchTitle(ProductTestData testData) {
@@ -52,6 +53,7 @@ public class TestSmartwatchFinder {
         assertThat(smartwatchName).isEqualTo(testData.getName());
     }
 
+    // Brittle test
     @ParameterizedTest
     @EnumSource(ProductTestData.class)
     void canFindSmartwatchPrice(ProductTestData testData) {
@@ -60,6 +62,7 @@ public class TestSmartwatchFinder {
         assertThat(smartwatchPrice).isEqualTo(testData.getPrice());
     }
 
+    // Brittle test
     @ParameterizedTest
     @EnumSource(ProductTestData.class)
     void canFindRating(ProductTestData testData) {
@@ -72,7 +75,7 @@ public class TestSmartwatchFinder {
     void productItemPrintsCorrectInfo() {
         smartwatch = smartwatchItemElements.get(0);
         String printData = smartwatch.print();
-        assertThat(printData).isEqualTo("Title: Smartband Xiaomi Mi Band 5 czarny | Price: 139.0 | Rating: 5.5");
+        assertThat(printData).matches("Title: [\\w\\s]+\\| Price: \\d+.\\d{1,2} \\| Rating: \\d.\\d");
     }
 
     @Test
