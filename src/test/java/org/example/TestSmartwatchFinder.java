@@ -15,6 +15,9 @@ import java.util.ArrayList;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+// TODO: Tests are brittle due to the instability of prices and ratings.
+// Tests should check if price EXISTS, and checking correct values should be done using mocks / dummy data.
+
 public class TestSmartwatchFinder {
 
     private static final String TEST_SAVE_FILE = ".\\src\\test\\test_files\\test_saving_objects.csv";
@@ -69,7 +72,7 @@ public class TestSmartwatchFinder {
     void productItemPrintsCorrectInfo() {
         smartwatch = smartwatchItemElements.get(0);
         String printData = smartwatch.print();
-        assertThat(printData).isEqualTo("Title: Smartband Xiaomi Mi Band 5 czarny | Price: 119.0 | Rating: 5.5");
+        assertThat(printData).isEqualTo("Title: Smartband Xiaomi Mi Band 5 czarny | Price: 139.0 | Rating: 5.5");
     }
 
     @Test

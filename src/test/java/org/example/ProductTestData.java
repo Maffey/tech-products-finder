@@ -1,9 +1,9 @@
 package org.example;
 
 public enum ProductTestData {
-    FIRST_ELEMENT(0, "Smartband Xiaomi Mi Band 5 czarny", 119.00f, 5.5f),
+    FIRST_ELEMENT(0, "Smartband Xiaomi Mi Band 5 czarny", 139.00f, 5.5f),
     SECOND_ELEMENT(1,"Smartband Xiaomi Mi Band 4 czarny", 59.99f, 5.7f),
-    THIRD_ELEMENT(2, "Smartband Xiaomi Mi Band 6", 179.00f, 5.8f);
+    THIRD_ELEMENT(2, "Smartband Xiaomi Mi Band 6", 219.0f, 5.8f);
 
 
     private final int index;
