@@ -19,7 +19,7 @@ public class Main {
         smartwatchesPage.goTo();
 
         // Find all smartwatches and gather information about them
-        ArrayList<ProductItem> listOfSmartwatches = smartwatchesPage.getSmartwatches();
+        ArrayList<ProductItem> listOfSmartwatches = smartwatchesPage.getProductItems();
         logger.info("Reading smartwatch data successful.");
 
         CsvRepository csvRepo = new CsvRepository("csv_output/smartwatches_list.csv");

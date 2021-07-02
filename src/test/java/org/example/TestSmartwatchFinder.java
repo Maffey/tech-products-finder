@@ -30,7 +30,7 @@ public class TestSmartwatchFinder {
         ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
         smartwatchesPage.goTo();
 
-        smartwatchItemElements = smartwatchesPage.getSmartwatches();
+        smartwatchItemElements = smartwatchesPage.getProductItems();
     }
 
     @AfterAll
