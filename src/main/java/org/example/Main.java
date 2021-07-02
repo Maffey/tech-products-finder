@@ -15,8 +15,9 @@ public class Main {
 
     public static void main(String[] args) {
         int pageCount = Integer.parseInt(args[0]);
-
-        ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
+        String productCategory = args[1];
+        logger.debug("Arguments provided --> Page: " + pageCount + " Category: " + productCategory);
+        ProductsPage smartwatchesPage = new ProductsPage(chooseProductCategory(productCategory));
         smartwatchesPage.goTo();
 
         // Find all smartwatches and gather information about them
@@ -29,7 +30,7 @@ public class Main {
         }
         logger.debug("Total products found: " + listOfSmartwatches.size());
 
-        CsvRepository csvRepo = new CsvRepository("csv_output/smartwatches_list.csv");
+        CsvRepository csvRepo = new CsvRepository("csv_output/product_list.csv");
         csvRepo.saveProductsList(listOfSmartwatches);
         logger.debug("Products saved to file.");
 
@@ -38,6 +39,15 @@ public class Main {
 
         Browser.close();
         logger.debug("Browser has been closed. Execution completed.");
+    }
+
+    public static ProductCategoryPage chooseProductCategory(String productCategoryArgument) {
+        return switch (productCategoryArgument) {
+            case "smartwatches" -> ProductCategoryPage.SMARTWATCHES;
+            case "laptops2in1" -> ProductCategoryPage.LAPTOPS_2_IN_1;
+            case "pc-games" -> ProductCategoryPage.PC_GAMES;
+            default -> throw new IllegalStateException("Unexpected value: " + productCategoryArgument);
+        };
     }
 
 }

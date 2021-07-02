@@ -1,2 +1,2 @@
-rootProject.name = "smartwatch-finder"
+rootProject.name = "tech-products-finder"
 
