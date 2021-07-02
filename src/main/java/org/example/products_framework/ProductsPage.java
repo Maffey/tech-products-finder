@@ -9,17 +9,10 @@ import java.util.List;
 public class ProductsPage {
 
     private final ProductCategoryPage productCategoryPage;
+    private int currentPageNumber = 0;
 
     public ProductsPage(ProductCategoryPage productCategoryPage) {
         this.productCategoryPage = productCategoryPage;
-    }
-
-    public void goTo() {
-        Browser.goTo(productCategoryPage.getUrl());
-    }
-
-    public boolean isAt() {
-        return Browser.getTitle().equals(productCategoryPage.getTitle());
     }
 
     public static ArrayList<ProductItem> getProductItems() {
@@ -35,6 +28,21 @@ public class ProductsPage {
             productItems.add(product);
         }
         return productItems;
+    }
+
+    public void goTo() {
+        Browser.goTo(productCategoryPage.getUrl());
+    }
+
+    public void nextPage() {
+        WebElement nextPageButton = Browser.driver.findElement(
+                By.cssSelector(Browser.selectorsRepository.getProperty("xkom.products_list.next_page.css")));
+        nextPageButton.click();
+        currentPageNumber++;
+    }
+
+    public int getCurrentPage() {
+        return currentPageNumber;
     }
 
 }

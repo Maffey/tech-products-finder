@@ -10,8 +10,13 @@ plugins {
     idea
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+val group = "org.example"
+val version = "1.0-SNAPSHOT"
+val javaClassName = "org.example.Main"
+
+application {
+    mainClass.set(javaClassName)
+}
 
 repositories {
     mavenCentral()

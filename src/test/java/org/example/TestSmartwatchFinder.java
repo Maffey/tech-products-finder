@@ -24,13 +24,14 @@ public class TestSmartwatchFinder {
     private static final String[] HEADER = {"NAME", "PRICE", "RATING"};
     private static ProductItem smartwatch;
     private static ArrayList<ProductItem> smartwatchItemElements;
+    private static ProductsPage smartwatchesPage;
 
     @BeforeAll
     static void setUpDriver() {
-        ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
+        smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
         smartwatchesPage.goTo();
 
-        smartwatchItemElements = smartwatchesPage.getProductItems();
+        smartwatchItemElements = ProductsPage.getProductItems();
     }
 
     @AfterAll
@@ -91,6 +92,12 @@ public class TestSmartwatchFinder {
         csvRepo.saveProductsList(smartwatchItemElements);
         ArrayList<String[]> csvContents = csvRepo.read();
         assertThat(listOfRows).hasSameElementsAs(csvContents);
+    }
+
+    @Test
+    void canGetToNextPage() {
+        smartwatchesPage.nextPage();
+        assertThat(Browser.getTitle()).isEqualTo("Smartwatche - Strona 2 - Sklep komputerowy - x-kom.pl");
     }
 
 }

@@ -2,21 +2,17 @@ package org.example.products_framework;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class Browser {
 
-    private static final Logger logger = LogManager.getLogger(Browser.class);
+    public static final Logger logger = LogManager.getLogger(Browser.class);
     private static final String SELENIUM_OBJECT_REPOSITORY_FILE = "\\selenium_object_repository.properties";
     public final static Properties selectorsRepository = loadObjectRepository();
     public static WebDriver driver = new FirefoxDriver();

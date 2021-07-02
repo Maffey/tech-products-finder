@@ -14,20 +14,30 @@ public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
     public static void main(String[] args) {
+        int pageCount = Integer.parseInt(args[0]);
 
         ProductsPage smartwatchesPage = new ProductsPage(ProductCategoryPage.SMARTWATCHES);
         smartwatchesPage.goTo();
 
         // Find all smartwatches and gather information about them
-        ArrayList<ProductItem> listOfSmartwatches = smartwatchesPage.getProductItems();
-        logger.info("Reading smartwatch data successful.");
+        ArrayList<ProductItem> listOfSmartwatches = new ArrayList<>();
+        for (int i=0; i < pageCount; i++) {
+            listOfSmartwatches.addAll(ProductsPage.getProductItems());
+            logger.info("Reading products data successful. Page: " + smartwatchesPage.getCurrentPage());
+            // Change page
+            smartwatchesPage.nextPage();
+        }
+        logger.debug("Total products found: " + listOfSmartwatches.size());
 
         CsvRepository csvRepo = new CsvRepository("csv_output/smartwatches_list.csv");
         csvRepo.saveProductsList(listOfSmartwatches);
+        logger.debug("Products saved to file.");
+
         // csvRepo.saveStringsList(csvRows, header);
         // csvRepo.print();
 
         Browser.close();
+        logger.debug("Browser has been closed. Execution completed.");
     }
 
 }
